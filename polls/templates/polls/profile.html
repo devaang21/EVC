@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+    <div>
+      <a class="dropdown-item" href="{% url 'polls:signup' %}">Logout</a>
+    </div>
+    <a href="{% url 'polls:createq' %}"><button type="button" class="btn btn-success mr-2">
+        Create a Poll
+      </button>
+    </a>
+
+    <a href="{% url 'polls:index' %}"><button type="button" class="btn btn-success mr-2">
+      Home
+    </button>
+  </a>
+
+    <div>
+      <h2>Details</h2>
+      <h3>Name:{{name}}</h3>
+      <h3>email:{{email}}</h3>
+    </div>
+
+    {% else %}
+    <a href="{% url 'polls:userlogin' %}"><button type="button" class="btn btn-success mr-2">
+        Login
+      </button>
+    </a>
+    {% endif %}
+    
+    {% if uspoll %}
+    <div>
+    <h3>Polls</h3>
+    <ul>
+    {% for question in uspoll %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %} 
+    </div>  
+  </body>
+</html>
+
+

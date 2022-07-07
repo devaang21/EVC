@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+  </head>
+  <body>
+    {% if u %}
+    <a href="{% url 'polls:profile' %}"><button type="button" class="btn btn-success mr-2">
+      You can't create more than 5 polls
+    </button>
+
+    {% else %}
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="form-group">
+          <label for="question">Question</label>
+          <input type="text" class="form-control" id="question" name="question" >
+        </div>
+        {% for i in n %}
+          <div class="form-group">
+            <label for="choice">Choice{{i}}</label>
+            <input type="text" class="form-control" id="choice{{i}}" name="choice{{i}}" >
+          </div>
+        {% endfor %}
+
+      <div class="d-flex justify-content-center mt-3 login_container">
+      <input class="btn login_btn" type="submit" value="Add">
+      </div>
+    </form>
+    {% endif%}
+  </body>
+</html>
